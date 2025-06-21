@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIとは何か？インタラクティブ・インフォグラフィック</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- 
+    Narrative Plan:
+    1. Introduction: Hook with a simple definition of AI.
+    2. Data Overview (Where is AI?): Use a bar chart to show AI prevalence in daily life.
+    3. Process Flow (How does AI think?): Use an HTML/CSS flowchart to explain the learning process.
+    4. Key Capabilities (What can AI do?): Use a radar chart to visualize AI's strengths.
+    5. Future Trends (The World with AI): Use an area chart to project AI's future growth/impact.
+    6. In-Depth Analysis (Living with AI): Use a donut chart to show public priorities for responsible AI.
+    7. Conclusion: A final, impactful statement.
+    
+    Visualization Choices:
+    - Section 2 (Where is AI?): Goal: Compare. Chosen Viz: Bar Chart (Chart.js). Justification: Best for comparing distinct categories (daily-life examples). NO SVG.
+    - Section 3 (How does AI think?): Goal: Organize. Chosen Viz: Flow Chart (HTML/Tailwind). Justification: Clearly shows a process sequence without using SVG or Mermaid JS.
+    - Section 4 (What can AI do?): Goal: Compare. Chosen Viz: Radar Chart (Chart.js). Justification: Effectively compares multiple quantitative variables (AI capabilities) on a single figure. NO SVG.
+    - Section 5 (The World with AI): Goal: Change. Chosen Viz: Area Chart (Chart.js). Justification: Ideal for showing a trend and volume change over time (future impact). NO SVG.
+    - Section 6 (Living with AI): Goal: Compare/Inform. Chosen Viz: Donut Chart (Chart.js). Justification: Excellent for showing the composition of a whole (priorities for responsible AI). NO SVG.
+    
+    Chosen Color Palette: Energetic & Playful
+    - #FF6B6B (Red)
+    - #FFD166 (Yellow)
+    - #06D6A0 (Green)
+    - #118AB2 (Blue)
+    - #073B4C (Dark Blue/Background)
+
+    Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All charts are rendered on Canvas by Chart.js, and diagrams are built with HTML and Tailwind CSS.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #073B4C;
+            color: #FFFFFF;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-step {
+            background-color: #118AB2;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+        .flowchart-arrow {
+            font-size: 2.5rem;
+            color: #FFD166;
+            line-height: 1;
+            margin: 0 0.5rem;
+            align-self: center;
+        }
+         .card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+        
+        <header class="text-center my-12 md:my-20">
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight text-white leading-tight">AIのせかいへ、ようこそ！</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">AI、つまり人工知能は、もう特別なものではありません。このページでは、AIが一体何者で、私たちの生活と未来にどう関わっているのかを、分かりやすく探検します。</p>
+        </header>
+
+        <main class="space-y-16 md:space-y-24">
+
+            <section id="what-is-ai" class="text-center">
+                 <div class="card rounded-xl shadow-lg p-6 md:p-10 max-w-4xl mx-auto">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">1. AIって何だろう？</h2>
+                    <p class="text-gray-300 mb-6 text-base md:text-lg">AIとは、コンピューターが人間のように「考え、学び、判断する」ための技術です。まるで、コンピューターに「心」をプログラムするようなものです。</p>
+                    <div class="bg-white/10 rounded-lg p-8">
+                        <p class="text-5xl md:text-7xl font-extrabold text-white">考える技術</p>
+                        <p class="mt-2 text-xl text-[#FFD166]">TECHNOLOGY TO THINK</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="where-is-ai">
+                <div class="card rounded-xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-center text-white mb-2">2. AIはどこにいる？</h2>
+                    <p class="text-center text-gray-300 mb-8 max-w-2xl mx-auto">実は、AIはあなたのすぐそばにいます。意識していないだけで、私たちは毎日たくさんのAI技術に触れています。以下のグラフは、AIが使われている身近な例とその認知度を示しています。</p>
+                    <div class="chart-container h-96 md:h-[450px]">
+                        <canvas id="everydayAiChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-gray-400 mt-4">このグラフは、一般的な認知度を基にした架空のデータです。</p>
+                </div>
+            </section>
+            
+            <section id="how-it-thinks">
+                <div class="card rounded-xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-center text-white mb-2">3. AIはどうやって考えるの？</h2>
+                    <p class="text-center text-gray-300 mb-8 max-w-2xl mx-auto">AIは大量の「データ」を教科書にして学習します。例えば、何千枚もの猫の写真を見ることで、「猫とは何か」のパターンを自分で見つけ出します。この学習プロセスは、とてもシンプルです。</p>
+                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                        <div class="flowchart-step">大量のデータ<br>(例: 写真)</div>
+                        <div class="flowchart-arrow transform md:-rotate-0 rotate-90">&rarr;</div>
+                        <div class="flowchart-step">パターン発見<br>(例: 特徴を学ぶ)</div>
+                        <div class="flowchart-arrow transform md:-rotate-0 rotate-90">&rarr;</div>
+                        <div class="flowchart-step">判断・予測<br>(例: 新しい写真を分類)</div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
+                <section id="what-it-can-do">
+                     <div class="card rounded-xl shadow-lg p-6 md:p-8 h-full">
+                        <h2 class="text-2xl md:text-3xl font-bold text-center text-white mb-2">4. AIの得意なこと</h2>
+                        <p class="text-center text-gray-300 mb-8">AIには人間には真似できない、いくつかの驚異的な能力があります。これにより、様々な分野で私たちの能力を拡張してくれます。</p>
+                        <div class="chart-container h-80 md:h-96">
+                            <canvas id="capabilitiesRadarChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="future-with-ai">
+                     <div class="card rounded-xl shadow-lg p-6 md:p-8 h-full">
+                        <h2 class="text-2xl md:text-3xl font-bold text-center text-white mb-2">5. AIがひらく未来</h2>
+                        <p class="text-center text-gray-300 mb-8">AI技術の導入は、私たちの社会に大きな変化をもたらします。以下のグラフは、AIがもたらす経済的インパクトの予測です。</p>
+                        <div class="chart-container h-80 md:h-96">
+                            <canvas id="futureImpactAreaChart"></canvas>
+                        </div>
+                         <p class="text-center text-sm text-gray-400 mt-4">このグラフは、一般的な成長予測を基にした架空のデータです。</p>
+                    </div>
+                </section>
+            </div>
+            
+            <section id="living-with-ai">
+                <div class="card rounded-xl shadow-lg p-6 md:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="text-center md:text-left">
+                            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">6. AIと仲良く暮らすために</h2>
+                            <p class="text-gray-300 mb-4">AIは強力な道具ですが、万能ではありません。AIと共存する未来をより良くするためには、私たちが大切にすべきことがあります。</p>
+                            <ul class="space-y-3 text-left">
+                                <li class="flex items-start"><span class="text-xl text-[#06D6A0] mr-3 mt-1">&#10003;</span><span><strong class="text-white">公平性：</strong>AIの判断が、性別や人種などで偏らないようにする。</span></li>
+                                <li class="flex items-start"><span class="text-xl text-[#06D6A0] mr-3 mt-1">&#10003;</span><span><strong class="text-white">透明性：</strong>AIがなぜその判断をしたのか、理由を説明できるようにする。</span></li>
+                                <li class="flex items-start"><span class="text-xl text-[#06D6A0] mr-3 mt-1">&#10003;</span><span><strong class="text-white">プライバシー：</strong>個人の情報を安全に管理し、無断で使わないようにする。</span></li>
+                                 <li class="flex items-start"><span class="text-xl text-[#06D6A0] mr-3 mt-1">&#10003;</span><span><strong class="text-white">人間との協力：</strong>最終的な決定は人間が行い、AIをサポート役として活用する。</span></li>
+                            </ul>
+                        </div>
+                        <div class="chart-container h-72 md:h-80">
+                            <canvas id="responsibilityDonutChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 md:mt-24 py-8 border-t border-white/10">
+            <h3 class="text-3xl md:text-4xl font-bold text-white">AIは、可能性の宝庫！</h3>
+            <p class="mt-4 text-gray-400">正しく理解し、賢く使うことで、私たちの世界はもっと面白くなります。</p>
+            <p class="mt-8 text-sm text-gray-500">Interactive Infographic by Google Gemini</p>
+        </footer>
+    </div>
+
+    <script>
+        const chartTooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#FFFFFF',
+                        font: { size: 14 }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: chartTooltipTitleCallback
+                    },
+                    titleFont: { size: 16 },
+                    bodyFont: { size: 14 },
+                    backgroundColor: 'rgba(0,0,0,0.7)',
+                    padding: 10,
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#D1D5DB' },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                },
+                y: {
+                    ticks: { color: '#D1D5DB' },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                }
+            }
+        };
+
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (label.length <= maxLength) return label;
+            
+            const words = label.replace(/（/g, ' （').replace(/）/g, '） ').split(' ');
+            let lines = [];
+            let currentLine = '';
+
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines.map(l => l.replace(/ （/g, '（').replace(/） /g, '）'));
+        };
+
+        const everydayAiLabels = ['スマートフォン (顔認証など)', 'オンラインサービス (おすすめ商品など)', '家電 (お掃除ロボットなど)', '自動車 (自動運転など)'];
+        new Chart(document.getElementById('everydayAiChart'), {
+            type: 'bar',
+            data: {
+                labels: everydayAiLabels.map(wrapLabel),
+                datasets: [{
+                    label: 'AIが使われている認知度 (%)',
+                    data: [85, 90, 70, 65],
+                    backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0', '#118AB2'],
+                    borderColor: '#073B4C',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                indexAxis: 'y',
+                plugins: { ...commonChartOptions.plugins, legend: { display: false } },
+                 scales: {
+                    x: { ...commonChartOptions.scales.x, suggestedMax: 100 },
+                    y: { ...commonChartOptions.scales.y }
+                 }
+            }
+        });
+        
+        new Chart(document.getElementById('capabilitiesRadarChart'), {
+            type: 'radar',
+            data: {
+                labels: ['計算速度', 'パターン認識', 'データ分析', '予測精度', '自動化'],
+                datasets: [{
+                    label: 'AIの能力',
+                    data: [95, 90, 88, 82, 92],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 107, 107, 0.4)',
+                    borderColor: '#FF6B6B',
+                    pointBackgroundColor: '#FF6B6B',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#FF6B6B'
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                 plugins: { ...commonChartOptions.plugins, legend: { display: false } },
+                 scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                        pointLabels: { color: '#FFFFFF', font: { size: 14 } },
+                        ticks: {
+                            color: '#073B4C',
+                            backdropColor: 'rgba(255, 255, 255, 0.8)',
+                            backdropPadding: 4,
+                            borderRadius: 4
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('futureImpactAreaChart'), {
+            type: 'line',
+            data: {
+                labels: ['2020', '2025', '2030', '2035'],
+                datasets: [{
+                    label: 'AIによる経済的インパクト (兆ドル)',
+                    data: [1.2, 4.5, 9.8, 15.7],
+                    fill: true,
+                    borderColor: '#06D6A0',
+                    backgroundColor: 'rgba(6, 214, 160, 0.3)',
+                    tension: 0.4
+                }]
+            },
+            options: { ...commonChartOptions, plugins: { ...commonChartOptions.plugins, legend: { display: false } } }
+        });
+
+        new Chart(document.getElementById('responsibilityDonutChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['プライバシー保護', '公平性・倫理', '人間による監督', '透明性の確保'],
+                datasets: [{
+                    label: '責任あるAIに重要なこと',
+                    data: [35, 30, 20, 15],
+                    backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0', '#118AB2'],
+                    borderColor: '#073B4C',
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            },
+            options: { ...commonChartOptions, scales: {} }
+        });
+    </script>
+</body>
+</html>
